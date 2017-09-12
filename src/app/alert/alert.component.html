@@ -1,0 +1,4 @@
+<div *ngIf="alertService.isVisible && !hide" class="notification" [ngClass]="alertService.status">
+	<button class="delete" (click)="hide = true"></button>
+	{{alertService.message}}
+</div>

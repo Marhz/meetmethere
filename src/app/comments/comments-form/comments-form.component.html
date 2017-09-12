@@ -1,0 +1,29 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img [src]="authService.getUser().avatar">
+    </p>
+  </figure>
+  <div class="media-content">
+    <form (ngSubmit)="submitComment(f)" #f="ngForm">    
+      <div class="field">
+        <p class="control">
+          <textarea [(ngModel)]="content" name="content" class="textarea" placeholder="Add a comment..."></textarea>
+        </p>
+      </div>
+      <nav class="level">
+        <div class="level-left">
+          <div class="level-item">
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+            <label class="checkbox">
+              <button type="submit" class="button is-info">Submit</button>
+            </label>
+          </div>
+        </div>
+      </nav>
+    </form>
+  </div>
+</article>

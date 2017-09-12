@@ -1,0 +1,38 @@
+<!-- <div class="comment">
+	<p>{{ comment.author.name }}</p>
+	{{ comment.content }}
+</div>
+ -->
+<div class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img [src]="comment.author.avatar">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>{{comment.author.name}}</strong> <small>{{comment.created_at}}</small>
+        <br>
+        {{comment.content}}
+      </p>
+    </div>
+    <nav class="level is-mobile">
+      <div class="level-left">
+        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-reply"></i></span>
+        </a>
+        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+        </a>
+        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-heart"></i></span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div *ngIf="canDelete()" class="media-right">
+    <button (click)="deleteComment()" class="delete"></button>
+  </div>
+</div>
+<hr>

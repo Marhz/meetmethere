@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '../node_modules/bulma/bulma.sass';
+
+$blue: hsl(217, 71%,  53%) !default
+
+.underline {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.blue {
+	color: $blue;
+}
+
+body {
+	font-family: "Open Sans";
+}

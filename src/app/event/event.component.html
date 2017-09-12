@@ -1,0 +1,22 @@
+<div class="section">
+	<button class="button is-outlined is-pulled-right is-medium" (click)="goBack()">Go back</button>	
+</div>
+<div *ngIf="event" class="event-page section">
+	<div class="event-details">
+		<h1 class="title">{{event.name}}</h1>
+		<h2 class="">{{event.description}}</h2>
+		<p>Address: {{event.address}} </p>
+		<span class="underline blue" (click)="toggleMap()">
+			[Show map <i class="fa" [ngClass]="showMap ? 'fa-caret-up' : 'fa-caret-down'" aria-hidden="true"></i>]
+		</span>
+		<div *ngIf="mapReady" id="map">
+			<agm-map *ngIf="showMap && !addressNotfound" [latitude]="coords.lat" [longitude]="coords.lng" [zoom]="12" >
+				<agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+			</agm-map>
+		</div>
+		<div *ngIf="addressNotfound">
+			<p class="">Address not found :(</p>
+		</div>
+	</div>
+	<app-comments [eventId]="event.id"></app-comments>
+</div>

@@ -1,0 +1,7 @@
+<div *ngFor="let event of events" class="box">
+	<a [routerLink]="['/events', event.id]" href="#">
+		<p>Name : {{event.name}}</p>
+		<hr>
+		<p>Description : {{event.description}}</p>
+	</a>
+</div>

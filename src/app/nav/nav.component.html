@@ -1,0 +1,20 @@
+<p class="subtitle" *ngIf="loggedIn()">Hello, {{authService.getUser().name}}</p>
+<nav class="tabs is-centered">
+  <ul>
+    <li>
+      <a routerLink="/events" routerLinkActive="is-active">Events</a>            
+    </li>
+    <li>
+      <a routerLink="/events/new" routerLinkActive="is-active">New event</a>
+    </li>
+    <li *ngIf="!loggedIn()">
+      <a routerLink="/signin" routerLinkActive="is-active">Sign in</a>      
+    </li>
+    <li *ngIf="!loggedIn()"> 
+      <a routerLink="/signup" routerLinkActive="is-active">Sign up</a>
+    </li>
+    <li *ngIf="loggedIn()">
+      <a routerLink="/signout" routerLinkActive="is-active">Log out</a>
+    </li>
+  </ul>
+</nav>
