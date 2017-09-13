@@ -1,10 +1,10 @@
 <div class="comments" *ngIf="comments">
 	<h1 class="title">{{comments.length }} commments</h1>
-	<app-comment 
-		*ngFor="let comment of comments" 
-		[comment]="comment" 
+	<app-comment
+		*ngFor="let comment of comments"
+		[comment]="comment"
 		[eventId]="eventId"
 		(deletedComment)="removeComment($event)"
 		></app-comment>
-	<app-comments-form [eventId]="eventId" (newComment)="addComment($event)"></app-comments-form>
+	<app-comments-form *ngIf="loggedIn()" [eventId]="eventId" (newComment)="addComment($event)"></app-comments-form>
 </div>

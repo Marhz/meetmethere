@@ -14,11 +14,12 @@ export class CommentComponent implements OnInit {
 	@Input() comment: Comment;
 	@Input() eventId: number;
 	@Output() deletedComment = new EventEmitter<number>();
+  	private showEditForm: boolean = false
 
   constructor(
-  	private authService: AuthService, 
+  	private authService: AuthService,
   	private commentService: CommentService,
-  	private alertService: AlertService
+  	private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -33,5 +34,8 @@ export class CommentComponent implements OnInit {
 			this.deletedComment.emit(this.comment.id);
 			this.alertService.show(res.message);
 		});
+	}
+	editComment() {
+		this.showEditForm = !this.showEditForm;
 	}
 }

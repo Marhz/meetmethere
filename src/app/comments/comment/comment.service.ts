@@ -36,8 +36,24 @@ export class CommentService {
 			.catch(this.handleError);
 	}
 
+	editComment(content: string, commentId: number) {
+		return this.http.put(
+				`${this.url}comments/edit?token=${this.authService.getToken()}`,
+				JSON.stringify({content, comment_id: commentId}),
+				{headers: this.headers}
+			)
+			.toPromise()
+			.then(res => res.json())
+			.catch(this.handleError)
+	}
+
+	loggedIn() {
+		return this.authService.isLoggedIn();
+	}
+
 	private handleError(error: any): Promise<any> {
 		console.error(error);
 		return Promise.reject(error.message || error);
 	}
+
 }

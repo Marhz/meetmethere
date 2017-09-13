@@ -38,7 +38,7 @@ export class AuthService {
 			return { token, decoded: JSON.parse(window.atob(base64)) };
 			}
 		)
-		.catch(err => console.log(err))			
+		.catch(this.handleError);
 	}
 
 	getUser(): User{
@@ -76,7 +76,6 @@ export class AuthService {
 
 	}
 	private handleError(error: any): Promise<any> {
-		console.error(error);
-		return Promise.reject(error.message || error);
+		return Promise.reject(error.json().error || error);
 	}
 }

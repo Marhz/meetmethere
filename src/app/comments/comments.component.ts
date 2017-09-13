@@ -31,4 +31,8 @@ export class CommentsComponent implements OnInit {
   removeComment(id: number): void {
     this.comments = this.comments.filter(comment => comment.id != id);
   }
+
+  loggedIn() {
+    return this.commentService.loggedIn();
+  }
 }

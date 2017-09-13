@@ -1,11 +1,11 @@
 <article class="media">
   <figure class="media-left">
-    <p class="image is-64x64">
-      <img [src]="authService.getUser().avatar">
+    <p class="image is-64x64" >
+      <img [src]="authService.getUser().avatar" *ngIf="!edit">
     </p>
   </figure>
   <div class="media-content">
-    <form (ngSubmit)="submitComment(f)" #f="ngForm">    
+    <form (ngSubmit)="submit(f)" #f="ngForm">
       <div class="field">
         <p class="control">
           <textarea [(ngModel)]="content" name="content" class="textarea" placeholder="Add a comment..."></textarea>

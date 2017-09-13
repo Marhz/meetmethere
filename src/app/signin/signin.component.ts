@@ -14,8 +14,8 @@ import { AlertService } from '../alert/alert.service';
 export class SigninComponent implements OnInit {
 
   constructor(
-    private authService: AuthService, 
-    private location: Location, 
+    private authService: AuthService,
+    private location: Location,
     private router: Router,
     private alertService: AlertService
    ) { }
@@ -34,6 +34,6 @@ export class SigninComponent implements OnInit {
         this.location.replaceState("/");
         this.router.navigate(["/"]);
       })
-  		.catch(err => console.log(err));
+  		.catch(err => this.alertService.show(err, "is-danger"));
   }
 }
