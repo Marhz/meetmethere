@@ -8,17 +8,27 @@ import { SigninComponent } from './../signin/signin.component';
 import { EventsFormComponent } from './../events-form/events-form.component';
 import { AuthGuard } from '../guards/auth-guard';
 import { SignoutComponent } from '../signin/signout.component';
+import { EventsMapComponent } from '../events-map/events-map.component'
 
 const routes: Routes = [
-	{
-		path: 'events',
-		component: EventsComponent,
-	},
+  {
+    path: '',
+    component: EventsComponent,
+  },
+  {
+    path: 'events',
+    component: EventsComponent,
+  },
 	{
 		path: 'events/new',
 		component: EventsFormComponent,
 		canActivate: [AuthGuard]
 	},
+  {
+    path: 'events/map',
+    component: EventsMapComponent,
+    canActivate: [AuthGuard]
+  },
 	{
 		path: 'events/:id',
 		component: EventComponent

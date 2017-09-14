@@ -8,7 +8,7 @@
 			<div class="field">
 				<label for="name" class="label">Event name :</label>
 				<p class="control">
-					<input type="text" id="name" name="name" (keyup)="test()" [ngModel]="event.name" class="input">
+					<input type="text" id="name" name="name" [ngModel]="event.name" class="input">
 				</p>
 			</div>
 			<div class="field">
@@ -18,12 +18,18 @@
 					</textarea>
 				</p>
 			</div>
-			<div class="field">
+<!-- 			<div class="field">
 				<label for="address" class="label">Event address :</label>
 				<p class="control">
 					<input [ngModel]="event.address" type="text" id="address" name="address" ngModel class="input">
 				</p>
-			</div>
+			</div> -->
+
+      <address-input (newAddress)="newAddress($event)"></address-input>
+      <p>{{ latitude }}</p><br/>
+      <p>{{ longitude }}</p>
+      <p>{{ loc }}</p>
+
 			<div class="field">
 				<label for="begin_at" class="label">Start :</label>
 				<p class="control">

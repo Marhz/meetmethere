@@ -7,10 +7,15 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-
+  private showMenu: boolean = false
 	constructor(private authService: AuthService) {}
 
   ngOnInit() {
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu
+    console.log(this.showMenu);
   }
 
 	loggedIn() {

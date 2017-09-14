@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { EventService } from '../event/event.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,24 +18,30 @@ import { AlertService } from '../alert/alert.service';
 export class EventsFormComponent implements OnInit {
 
 	private editing: boolean = false;
-	private event: Event = new Event(	);
+	private event: Event = new Event();
 	private id: number;
-	
+  public latitude: number = 0;
+  public longitude: number = 0;
+  public loc: string;
+
 	constructor(
-		private eventService: EventService, 
-		private router: Router, 
+		private eventService: EventService,
+		private router: Router,
 		private route: ActivatedRoute,
 		private alertService: AlertService,
 		private location: Location,
 	) { }
 
 	ngOnInit() {
-		this.checkIfEditForm()
+		this.checkIfEditForm();
 	}
 
 	submitEvent(form: NgForm) {
 		this.event = form.value;
+    this.event.latitude = this.latitude;
+    this.event.longitude = this.longitude;
 		this.event.id = this.id;
+    this.event.address = this.loc;
 		const met = this.editing ? "updateEvent" : "submitEvent";
 		this.eventService[met](this.event)
 			.then(res => {
@@ -59,8 +65,14 @@ export class EventsFormComponent implements OnInit {
 						});
 					this.editing = true;
 				}
-				else 
+				else
 					this.editing = false;
 			});
 	}
+
+  newAddress(data): void {
+    this.latitude = data.latitude;
+    this.longitude = data.longitude;
+    this.loc = data.address;
+  }
 }

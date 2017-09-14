@@ -61,8 +61,16 @@ export class EventService {
 		return this.http
 			.put(`${this.eventsUrl}/${event.id}?token=${this.authService.getToken()}`, JSON.stringify(event), {headers: this.headers})
 			.toPromise()
-			.then(res => res.json())
+			.then(res => res.json());
 	}
+
+  getEventsNear(coords): Promise<Event[]> {
+    const url = `${this.eventsUrl}/map?lat=${coords.lat}&lng=${coords.lng}&distance=${coords.distance}`;
+    return this.http
+      .get(url, {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data);
+  }
 
 	private handleError(error: any): Promise<any> {
 		// console.error(error);

@@ -5,7 +5,8 @@ export class Event {
 	address: string;
 	begin_at: string;
 	end_at: string;
-
+  latitude: number;
+  longitude: number;
 	constructor(
 		// // public id: number,
 		// public name: string,

@@ -36,14 +36,18 @@ export class EventComponent implements OnInit {
 		this.route.paramMap
 			.switchMap((params: ParamMap) => this.eventService.getEvent(+params.get('id')))
 			.subscribe(event => {
-				this.event = event
-				this.getEventCoordinates(event.address);
+				this.event = event;
+        this.coords = {lat: event.latitude, lng: event.longitude};
+        this.mapReady = true;
+        console.log(this.coords);
+				//this.getEventCoordinates(event.address);
 			});
 	}
 
-	getEventCoordinates(address: string): void {
-		const coordinates = this.eventService.getEventCoordinates(address)
+/*	getEventCoordinates(address: string): void {
+		this.eventService.getEventCoordinates(address)
 			.then(coordinates => {
+        console.log(coordinates);
 				this.coords = coordinates;
 				this.mapReady = true;
 			})
@@ -51,12 +55,11 @@ export class EventComponent implements OnInit {
 				this.addressNotfound = true;
 			});
 	}
-	goBack(): void {
+*/	goBack(): void {
 		this.location.back();
 	}
 
 	toggleMap(): void {
-		console.log(this.addressNotfound);
 		this.showMap = !this.showMap;
 	}
 }

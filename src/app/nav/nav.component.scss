@@ -1,3 +1,9 @@
+@import '../../../node_modules/bulma/sass/utilities/variables.sass';
+
 .title {
 	color: red;
+}
+
+.navbar {
+  background: $yellow
 }

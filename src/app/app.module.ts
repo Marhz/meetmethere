@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
@@ -22,6 +22,8 @@ import { AlertComponent } from './alert/alert.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentComponent } from './comments/comment/comment.component';
 import { CommentsFormComponent } from './comments/comments-form/comments-form.component';
+import { EventsMapComponent } from './events-map/events-map.component';
+import { AddressInputComponent } from './address-input/address-input.component';
 
 @NgModule({
   declarations: [
@@ -36,15 +38,19 @@ import { CommentsFormComponent } from './comments/comments-form/comments-form.co
     AlertComponent,
     CommentsComponent,
     CommentComponent,
-    CommentsFormComponent
+    CommentsFormComponent,
+    EventsMapComponent,
+    AddressInputComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDTEB9KInzNBTsPt3vUYZkrpuWb88oiqDE'
+      apiKey: 'AIzaSyDTEB9KInzNBTsPt3vUYZkrpuWb88oiqDE',
+      libraries: ["places"]
     })
   ],
   providers: [EventService, AuthService, AlertService],

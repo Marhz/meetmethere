@@ -1,20 +1,50 @@
-<p class="subtitle" *ngIf="loggedIn()">Hello, {{authService.getUser().name}}</p>
-<nav class="tabs is-centered">
-  <ul>
-    <li>
-      <a routerLink="/events" routerLinkActive="is-active">Events</a>            
-    </li>
-    <li>
-      <a routerLink="/events/new" routerLinkActive="is-active">New event</a>
-    </li>
-    <li *ngIf="!loggedIn()">
-      <a routerLink="/signin" routerLinkActive="is-active">Sign in</a>      
-    </li>
-    <li *ngIf="!loggedIn()"> 
-      <a routerLink="/signup" routerLinkActive="is-active">Sign up</a>
-    </li>
-    <li *ngIf="loggedIn()">
-      <a routerLink="/signout" routerLinkActive="is-active">Log out</a>
-    </li>
-  </ul>
+<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://bulma.io">
+      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+
+    <button class="button navbar-burger" (click)="toggleMenu()" [ngClass]="{'is-active': showMenu}">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="navbar-menu" [ngClass]="{'is-active': showMenu}">
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
+        <span class="icon">
+          <i class="fa fa-home"></i>
+        </span>
+        Home
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" routerLink="/events" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
+          <span class="icon">
+            <i class="fa fa-calendar"></i>
+          </span>
+          Events</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" routerLink="/events" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">All Events</a>
+          <a class="navbar-item" routerLink="/events/new" routerLinkActive="is-active">New Event</a>
+          <a class="navbar-item" routerLink="/events/map" routerLinkActive="is-active">Map</a>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control" *ngIf="!loggedIn()">
+            <a routerLink="/signin" routerLinkActive="is-active" class="button is-success">Sign in</a>
+          </p>
+          <p class="control" *ngIf="!loggedIn()">
+            <a routerLink="/signup" routerLinkActive="is-active" class="button is-info">Sign up</a>
+          </p>
+          <p class="control" *ngIf="loggedIn()">
+            <a routerLink="/signout" routerLinkActive="is-active" class="button is-dark">Log out</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

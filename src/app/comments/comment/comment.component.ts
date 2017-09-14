@@ -14,7 +14,7 @@ export class CommentComponent implements OnInit {
 	@Input() comment: Comment;
 	@Input() eventId: number;
 	@Output() deletedComment = new EventEmitter<number>();
-  	private showEditForm: boolean = false
+  private showEditForm: boolean = false
 
   constructor(
   	private authService: AuthService,

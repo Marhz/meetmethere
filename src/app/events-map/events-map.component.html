@@ -1,0 +1,13 @@
+<div class="section">
+  <h1 class="title">Event near :</h1>
+  <address-input (newAddress)="updateCenter($event)"></address-input>
+  <div *ngIf="mapReady" id="map">
+    <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="14" >
+      <agm-marker
+        *ngFor="let event of events"
+        [latitude]="event.latitude"
+        [longitude]="event.longitude"
+      ></agm-marker>
+    </agm-map>
+  </div>
+</div>
