@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '../node_modules/bulma/bulma.sass';
+@import './variables.sass';
 
 $blue: hsl(217, 71%,  53%) !default
 
@@ -13,6 +13,30 @@ $blue: hsl(217, 71%,  53%) !default
 	color: $blue;
 }
 
-body {
+body * {
 	font-family: "Open Sans";
+}
+
+.clear {
+  clear:both;
+}
+
+html {
+  font-size: 20px;
+  @media screen and (max-width: $tablet) {
+    font-size: 16px;
+    & .is-fluid {
+      padding: 0;
+    }
+  }
+}
+
+// .navbar {
+//   height: 120px;
+// }
+
+.flex {
+  display: flex;
+  align-items: center;
+
 }

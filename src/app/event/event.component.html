@@ -1,22 +1,40 @@
-<div class="section">
-	<button class="button is-outlined is-pulled-right is-medium" (click)="goBack()">Go back</button>
-</div>
-<div *ngIf="event" class="event-page section">
-	<div class="event-details">
-		<h1 class="title">{{event.name}}</h1>
-		<h2 class="">{{event.description}}</h2>
-		<p>Address: {{event.address}} </p>
-		<span class="underline blue" (click)="toggleMap()">
-			[Show map <i class="fa" [ngClass]="showMap ? 'fa-caret-up' : 'fa-caret-down'" aria-hidden="true"></i>]
-		</span>
-		<div *ngIf="mapReady" id="map">
-			<agm-map *ngIf="showMap && !addressNotfound" [latitude]="coords.lat" [longitude]="coords.lng" [zoom]="12" >
-				<agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
-			</agm-map>
-		</div>
-		<div *ngIf="addressNotfound">
-			<p class="">Address not found :(</p>
-		</div>
-	</div>
-	<app-comments [eventId]="event.id"></app-comments>
+ <div *ngIf="event" class="event-page section is-fluid">
+   <div class="event columns is-multiline is-centered">
+    <div class="event-details column is-12 is-9-widescreen is-8-desktop">
+      <p class="title">{{event.name}}</p>
+      <p class="">{{event.description}}</p>
+      <p>Address: {{event.address}} </p>
+      <div class="event-participation-buttons">
+        <button class="button is-success" (click)="participate()" *ngIf="!isParticipating()">Participate</button>
+        <button class="button is-warning" (click)="cancelParticipation()" *ngIf="isParticipating()">Cancel participation</button>
+      </div>
+      <div class="clear"></div>
+      <span class="underline blue" (click)="toggleMap()">
+        [{{ showMap ? 'hide' : 'show' }} map <i class="fa" [ngClass]="showMap ? 'fa-caret-up' : 'fa-caret-down'" aria-hidden="true"></i>]
+      </span>
+      <div *ngIf="mapReady" id="map">
+        <agm-map *ngIf="showMap && !addressNotfound" [latitude]="coords.lat" [longitude]="coords.lng" [zoom]="12" >
+          <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+        </agm-map>
+      </div>
+      <div *ngIf="addressNotfound">
+        <p class="">Address not found :(</p>
+      </div>
+    </div>
+    <div class="column is-3-widescreen is-12-mobile is-6-tablet is-4-desktop">
+      <div class="participation-info">
+        <p class="participation-info-number">{{ event.participants.length }} Participants</p>
+        <hr/>
+        <ul>
+          <li *ngFor="let user of event.participants" class="flex">
+            <figure class="img is-48x48">
+              <img src="{{ user.avatar }}" alt="">
+            </figure>
+            <p>{{ user.name }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<app-comments [eventId]="event.id"></app-comments>
 </div>

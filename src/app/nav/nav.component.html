@@ -1,4 +1,4 @@
-<nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+<nav class="navbar is-info" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="http://bulma.io">
       <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
@@ -30,7 +30,19 @@
           <a class="navbar-item" routerLink="/events/map" routerLinkActive="is-active">Map</a>
         </div>
       </div>
+      <a class="navbar-item search-icon">
+        <span class="icon">
+          <i class="fa fa-search"></i>
+        </span>
+      </a>
+      <div class="navbar-item input-search">
+        <span class="field">
+          <input type="text" class="input search">
+        </span>
+      </div>
+
     </div>
+
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="field is-grouped">
@@ -40,9 +52,20 @@
           <p class="control" *ngIf="!loggedIn()">
             <a routerLink="/signup" routerLinkActive="is-active" class="button is-info">Sign up</a>
           </p>
-          <p class="control" *ngIf="loggedIn()">
-            <a routerLink="/signout" routerLinkActive="is-active" class="button is-dark">Log out</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable" *ngIf="loggedIn()">
+        <div class="navbar-link">
+          <figure class="image is-64x64 avatar">
+            <img src="{{ user.avatar }}">
+          </figure>
+           {{ user.name }}
+        </div>
+        <div class="navbar-dropdown">
+          <p class="control">
           </p>
+          <a class="navbar-item" routerLink="/profile" routerLinkActive="is-active">Profile</a>
+          <a class="navbar-item" routerLink="/signout" routerLinkActive="is-active">Log out</a>
         </div>
       </div>
     </div>

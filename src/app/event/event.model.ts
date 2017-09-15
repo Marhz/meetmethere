@@ -1,3 +1,5 @@
+import { User } from '../user';
+
 export class Event {
 	id: number;
 	name: string;
@@ -7,12 +9,7 @@ export class Event {
 	end_at: string;
   latitude: number;
   longitude: number;
-	constructor(
-		// // public id: number,
-		// public name: string,
-		// public description: string,
-		// public address: string,
-		// public begin_at: string,
-		// public end_at: string,
-	){}
+  participants: User[];
+
+  constructor() {}
 }

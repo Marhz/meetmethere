@@ -1,8 +1,57 @@
+@import "../../../node_modules/bulma/sass/utilities/variables.sass";
+
 agm-map {
   height: 300px;
-  width: 50%
+  width: 100%
 }
 
-.event-details {
-	margin-bottom: 50px;
+.event {
+  // display: flex;
+  // justify-content: space-between;
+  margin-bottom: 50px;
+  &-details {
+  }
+  &-participation-buttons {
+    margin: 20px 0;
+    float: right;
+  }
+}
+
+
+.participation-info {
+  font-size: 0.8rem;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  // width: 400px;
+  flex: 2;
+  border: 1px solid rgba(0, 0 ,0, .4);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0 ,0, .4);
+  & img {
+    margin-right: 10px;
+    width: 48px;
+  }
+  &-number {
+    text-align: center;
+    font-size: 1.3em;
+  }
+  & hr {
+    height: 1px;
+    margin: 10px 0;
+  }
+  & ul {
+    margin: 0 25px;
+  }
+  @media screen and (max-width: $tablet) {
+    // margin: auto;
+    // max-width: 100%;
+    & figure {
+      width: 32px;
+    }
+    & ul {
+      margin: 0 10px;
+    }
+  }
 }

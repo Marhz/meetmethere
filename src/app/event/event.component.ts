@@ -5,6 +5,8 @@ import 'rxjs/add/operator/switchMap';
 
 import { Event } from './event.model';
 import { EventService } from './event.service';
+import { AuthService } from '../services/auth.service';
+import { ParticipationService } from '../services/participation.service';
 import { AgmCoreModule } from '@agm/core';
 import { AlertService } from "../alert/alert.service";
 
@@ -22,15 +24,16 @@ export class EventComponent implements OnInit {
 	private addressNotfound = false;
 
 	constructor(
-		private eventService: EventService,
+    private eventService: EventService,
+    private participationService: ParticipationService,
+		private authService: AuthService,
 		private route: ActivatedRoute,
 		private location: Location,
 		private alertService: AlertService
 	) { }
 
 	ngOnInit() {
-		this.getEvent();
-	}
+		this.getEvent();	}
 
 	getEvent(): void {
 		this.route.paramMap
@@ -39,7 +42,8 @@ export class EventComponent implements OnInit {
 				this.event = event;
         this.coords = {lat: event.latitude, lng: event.longitude};
         this.mapReady = true;
-        console.log(this.coords);
+    console.log(this.event);
+
 				//this.getEventCoordinates(event.address);
 			});
 	}
@@ -62,4 +66,22 @@ export class EventComponent implements OnInit {
 	toggleMap(): void {
 		this.showMap = !this.showMap;
 	}
+
+  participate(): void {
+    this.participationService.participate(this.event.id)
+      .then(res => {
+        this.event.participants.push(this.authService.getUser());
+      });
+  }
+
+  cancelParticipation(): void {
+    this.participationService.cancel(this.event.id)
+      .then(res => {
+        this.event.participants = this.event.participants.filter(user => user.id !== this.authService.getUser().id);
+      })
+  }
+
+  isParticipating(): boolean {
+    return this.event.participants.filter(user => user.id == this.authService.getUser().id).length > 0
+  }
 }

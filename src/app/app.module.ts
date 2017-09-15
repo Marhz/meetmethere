@@ -24,6 +24,8 @@ import { CommentComponent } from './comments/comment/comment.component';
 import { CommentsFormComponent } from './comments/comments-form/comments-form.component';
 import { EventsMapComponent } from './events-map/events-map.component';
 import { AddressInputComponent } from './address-input/address-input.component';
+import { ParticipationService } from './services/participation.service';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,7 @@ import { AddressInputComponent } from './address-input/address-input.component';
       libraries: ["places"]
     })
   ],
-  providers: [EventService, AuthService, AlertService],
+  providers: [EventService, AuthService, AlertService, ParticipationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

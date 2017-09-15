@@ -7,8 +7,4 @@ export class User {
 		public created_at: string,
 		public updated_at: string,
 	) {}
-
-	test(): void {
-		console.log('lolwut');
-	}
 }

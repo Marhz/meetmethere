@@ -1,9 +1,56 @@
-@import '../../../node_modules/bulma/sass/utilities/variables.sass';
+@import '../../variables.sass';
 
 .title {
 	color: red;
 }
 
+.navbar-item img {
+  max-height: 100%;
+}
+
+.avatar {
+  margin-right: 20px;
+}
+
+.avatar img {
+  border-radius: 50%;
+}
+.navbar-end {
+  margin-right: 50px;
+}
+
+.field {
+  // height: 80%;
+  border-radius: 50px;
+  background: $turquoise;
+}
+.search {
+  background: lighten($blue, 5);
+  // height: 50%;
+  // font-size: 50px;
+  border: none;
+  color: white;
+  border-radius: 50px;
+}
+
+.input-search {
+  width: 0;
+  border-radius: 35px;
+  opacity: 0;
+  transition: all .5s;
+
+  .search-icon:hover + &, &:hover {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+.search-icon {
+  font-size: 1.6rem;
+  &:hover {
+    background: $turquoise !important;
+  }
+}
 .navbar {
-  background: $yellow
+  z-index: 1000;
 }

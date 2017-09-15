@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-nav',
@@ -8,14 +9,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavComponent implements OnInit {
   private showMenu: boolean = false
+  private user: User;
+
 	constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    this.user = this.authService.getUser();
   }
 
   toggleMenu() {
     this.showMenu = !this.showMenu
-    console.log(this.showMenu);
   }
 
 	loggedIn() {
