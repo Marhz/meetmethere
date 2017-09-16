@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Event } from './event.model';
 
@@ -13,24 +14,22 @@ export class EventService {
 	private eventsUrl = 'http://meetmethere.dev/api/events';
 	private headers = new Headers({'Content-type' : 'application/json'});
 
-	constructor(private http: Http, private authService: AuthService) {}
+	constructor(private http: Http, private httpClient: HttpClient, private authService: AuthService) {}
 
 	getEvents(): Promise<Event[]> {
-		return this.http
-			.get(this.eventsUrl)
+		return this.httpClient
+			.get("events")
 			.toPromise()
-			.then(res => res.json() as Event[])
+			.then(res => res as Event[])
 			.catch(this.handleError);
 	}
 
 	submitEvent(event: Event): Promise<any> {
-		return this.http
-			.post(`${this.eventsUrl}/?token=${this.authService.getToken()}`, JSON.stringify(event), {headers: this.headers})
+		return this.httpClient
+			.post("events", event)
 			.toPromise()
 			.then(res => {
-				console.log(res.headers);
-				console.log(res.headers.toJSON());
-				return res.json();
+				return res;
 			})
 			.catch(this.handleError);
 	}
@@ -67,7 +66,7 @@ export class EventService {
   getEventsNear(coords): Promise<Event[]> {
     const url = `${this.eventsUrl}/map?lat=${coords.lat}&lng=${coords.lng}&distance=${coords.distance}`;
     return this.http
-      .get(url, {headers: this.headers})
+      .get(url)
       .toPromise()
       .then(res => res.json().data);
   }

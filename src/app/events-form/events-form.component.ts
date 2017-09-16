@@ -45,8 +45,9 @@ export class EventsFormComponent implements OnInit {
 		const met = this.editing ? "updateEvent" : "submitEvent";
 		this.eventService[met](this.event)
 			.then(res => {
-				this.alertService.show(res.message);
-				this.router.navigate([`/events/${res.data.id}`]);
+        console.log('added');
+				// this.alertService.show(res.message);
+				// this.router.navigate([`/events/${res.id}`]);
 			})
 			.catch(err => console.log(err));
 	};

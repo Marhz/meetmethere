@@ -20,7 +20,7 @@ export class EventComponent implements OnInit {
 	private id: number;
 	private coords;
 	private mapReady = false;
-	private showMap = false;
+	private hideMap = true;
 	private addressNotfound = false;
 
 	constructor(
@@ -33,7 +33,9 @@ export class EventComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.getEvent();	}
+		this.getEvent();
+    // setTimeout(() => this.hideMap = true, 3000);
+  }
 
 	getEvent(): void {
 		this.route.paramMap
@@ -45,7 +47,7 @@ export class EventComponent implements OnInit {
     console.log(this.event);
 
 				//this.getEventCoordinates(event.address);
-			});
+			}, err => console.log("..."));
 	}
 
 /*	getEventCoordinates(address: string): void {
@@ -64,7 +66,8 @@ export class EventComponent implements OnInit {
 	}
 
 	toggleMap(): void {
-		this.showMap = !this.showMap;
+		this.hideMap = !this.hideMap;
+    console.log(this.hideMap);
 	}
 
   participate(): void {

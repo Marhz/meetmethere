@@ -24,6 +24,12 @@ export class EventsMapComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.center = {lat: position.coords.latitude, lng: position.coords.longitude};
+        this.getEvents();
+      });
+    }
     this.center = {lat: 48.864716, lng: 2.349014, distance: 150};
     this.getEvents();
   }

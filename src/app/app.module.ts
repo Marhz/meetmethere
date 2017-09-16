@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './routing/app-routing.module';
 
@@ -26,6 +27,10 @@ import { EventsMapComponent } from './events-map/events-map.component';
 import { AddressInputComponent } from './address-input/address-input.component';
 import { ParticipationService } from './services/participation.service';
 
+import { HeadersInterceptor } from "./interceptors/headers.interceptor";
+import { MessageInterceptor } from "./interceptors/message.interceptor";
+import { UrlInterceptor } from "./interceptors/url.interceptor";
+import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -50,12 +55,39 @@ import { ParticipationService } from './services/participation.service';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDTEB9KInzNBTsPt3vUYZkrpuWb88oiqDE',
       libraries: ["places"]
     })
   ],
-  providers: [EventService, AuthService, AlertService, ParticipationService],
+  providers: [
+    EventService,
+    AuthService,
+    AlertService,
+    ParticipationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeadersInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MessageInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

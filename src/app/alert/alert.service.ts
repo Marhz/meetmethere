@@ -11,7 +11,7 @@ export class AlertService {
 	public status: string;
 	constructor() {}
 
-	show(message: string, status: string = "is-primary") {
+	show(message: string, status: string = "is-success") {
 		this.isVisible = true;
 		this.message = message;
 		this.status = status;

@@ -18,6 +18,12 @@
         </span>
         Home
       </a>
+      <a class="navbar-item" (click)="authService.refreshToken()">
+        <span class="icon">
+          <i class="fa fa-home"></i>
+        </span>
+        Refresh
+      </a>
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" routerLink="/events" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
           <span class="icon">
