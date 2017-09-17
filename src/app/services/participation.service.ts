@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
@@ -13,11 +14,11 @@ export class ParticipationService {
   private apiUrl = 'http://meetmethere.dev/api/events';
   private headers = new Headers({'Content-type' : 'application/json'});
 
-  constructor(private http: Http, private authService: AuthService) {}
+  constructor(private http: Http, private authService: AuthService, private httpClient: HttpClient) {}
 
   participate(eventId: number): Promise<any> {
-    return this.http
-      .post(`${this.apiUrl}/${eventId}/participate?token=${this.authService.getToken()}`, JSON.stringify(''), {headers: this.headers})
+    return this.httpClient
+      .post(`events/${eventId}/participate`, JSON.stringify(''))
       .toPromise()
       .then(res => res)
       .catch(this.handleError);
@@ -25,8 +26,8 @@ export class ParticipationService {
   }
 
   cancel(eventId: number): Promise<any> {
-    return this.http
-      .delete(`${this.apiUrl}/${eventId}/participate/cancel?token=${this.authService.getToken()}`)
+    return this.httpClient
+      .delete(`events/${eventId}/participate/cancel`)
       .toPromise()
       .then(res => res)
       .catch(this.handleError);

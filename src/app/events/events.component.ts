@@ -11,15 +11,15 @@ import { EventService } from '../event/event.service';
 })
 export class EventsComponent implements OnInit {
 
-	events: Event[];
+  events: Event[];
 
   constructor(
-  	private router: Router,
-  	private eventService : EventService,
+    private router: Router,
+    private eventService: EventService
   ) { }
 
   ngOnInit() {
-  	this.getEvents();
+    this.getEvents();
   }
 
   getEvents(): void {

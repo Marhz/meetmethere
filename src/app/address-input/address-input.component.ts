@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 
@@ -11,6 +11,7 @@ import { MapsAPILoader } from '@agm/core';
 })
 export class AddressInputComponent implements OnInit {
 
+  @Input() label: string = "";
   public formControl: FormControl;
   @ViewChild("search")
   public searchElementRef: ElementRef
@@ -24,15 +25,12 @@ export class AddressInputComponent implements OnInit {
   ngOnInit() {
     this.formControl = new FormControl();
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
-      autocomplete.addListener("place_changed", () => {
+      const el = this.searchElementRef.nativeElement;
+      let autocomplete = new google.maps.places.Autocomplete(el);
+      autocomplete.addListener("place_changed", (e) => {
         this.ngZone.run(() => {
-          //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
@@ -45,5 +43,12 @@ export class AddressInputComponent implements OnInit {
       });
     });
   }
+  cancelSubmit(e: KeyboardEvent): void {
+    if (e.keyCode == 13)
+      e.preventDefault();
+  }
 
+  labelPresent(): boolean {
+    return this.label.length > 0;
+  }
 }

@@ -31,6 +31,7 @@ import { HeadersInterceptor } from "./interceptors/headers.interceptor";
 import { MessageInterceptor } from "./interceptors/message.interceptor";
 import { UrlInterceptor } from "./interceptors/url.interceptor";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { JwtInterceptor } from "./interceptors/jwt.interceptor";
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDTEB9KInzNBTsPt3vUYZkrpuWb88oiqDE',
       libraries: ["places"]
-    })
+    }),
+    MyDatePickerModule,
   ],
   providers: [
     EventService,

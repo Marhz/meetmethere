@@ -1,16 +1,9 @@
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { Http, Headers } from "@angular/http";
 import { HttpRequest, HttpClient } from '@angular/common/http';
-// import { HttpClient } from "@angular/common/http";
 import { User } from "../user";
 import 'rxjs/add/operator/map';
 import { AlertService } from '../alert/alert.service';
-
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpEventType, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Location } from '@angular/common';
-import 'rxjs/add/operator/do';
-
 
 import 'rxjs/add/operator/toPromise';
 
@@ -38,7 +31,6 @@ export class AuthService {
 		.post(`${this.eventsUrl}/login`, { email, password }, { headers: this.headers })
 		.toPromise()
 		.then(res => {
-      console.log(res);
 			const token = res.json().token;
 			const base64Url = token.split('.')[1];
 			const base64 = base64Url.replace('-', '+').replace('_', '/');

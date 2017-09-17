@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { EventService } from '../event/event.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { Event } from '../event/event.model';
 import { AlertService } from '../alert/alert.service';
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 
 @Component({
 	selector: 'app-events-form',
@@ -22,7 +23,15 @@ export class EventsFormComponent implements OnInit {
 	private id: number;
   public latitude: number = 0;
   public longitude: number = 0;
-  public loc: string;
+  public address: string;
+  public datePickerOption: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+    openSelectorOnInputClick: true,
+    editableDateField: false,
+    inline: false,
+  };
+  public begin: any;
+  public end: any;
 
 	constructor(
 		private eventService: EventService,
@@ -33,6 +42,8 @@ export class EventsFormComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+    const date = new Date();
+    // this.baseDate = {date: {year: date.getFullYear, month: date.getMonth, day: date.getDay}}
 		this.checkIfEditForm();
 	}
 
@@ -41,13 +52,13 @@ export class EventsFormComponent implements OnInit {
     this.event.latitude = this.latitude;
     this.event.longitude = this.longitude;
 		this.event.id = this.id;
-    this.event.address = this.loc;
+    this.event.address = this.address;
+    this.event.begin_at = this.begin;
+    this.event.end_at = this.end;
 		const met = this.editing ? "updateEvent" : "submitEvent";
 		this.eventService[met](this.event)
 			.then(res => {
-        console.log('added');
-				// this.alertService.show(res.message);
-				// this.router.navigate([`/events/${res.id}`]);
+				this.router.navigate([`/events/${res.id}`]);
 			})
 			.catch(err => console.log(err));
 	};
@@ -74,6 +85,15 @@ export class EventsFormComponent implements OnInit {
   newAddress(data): void {
     this.latitude = data.latitude;
     this.longitude = data.longitude;
-    this.loc = data.address;
+    this.address = data.address;
   }
+
+  onBeginChanged(event: IMyDateModel) {
+    this.begin = event.formatted
+  }
+
+  onEndChanged(event: IMyDateModel) {
+    this.end = event.formatted
+  }
+
 }

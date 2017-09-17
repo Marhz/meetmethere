@@ -1,4 +1,5 @@
 <div class="field">
+  <label for="" class="label" *ngIf="labelPresent()">{{ label }}</label>
   <input
     placeholder="Location..."
     autocorrect="off"
@@ -7,5 +8,7 @@
     type="address"
     class="input"
     #search
-    [formControl]="formControl">
+    [formControl]="formControl"
+    (keydown)="cancelSubmit($event)"
+  >
 </div>
