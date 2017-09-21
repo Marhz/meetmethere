@@ -9,13 +9,11 @@ export class HeadersInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (['POST', 'PUT', 'DELETE'].includes(req.method)) {
-      req = req.clone({
-        setHeaders: {
-          authorization: 'Bearer ' + this.authService.getToken(),
-        }
-      });
-    }
+    req = req.clone({
+      setHeaders: {
+        authorization: 'Bearer ' + this.authService.getToken(),
+      }
+    });
     return next.handle(req);
   }
 }

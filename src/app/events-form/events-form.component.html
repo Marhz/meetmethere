@@ -9,13 +9,13 @@
 				<label for="name" class="label">Event name :</label>
 				<p class="control">
 					<input type="text" id="name" name="name" [ngModel]="event.name" class="input">
-				</p>
+        </p>
 			</div>
 			<div class="field">
 				<label for="banner" class="label">Banner</label>
-				<div class="file">
+				<div class="file has-name">
 					<label class="file-label">
-						<input class="file-input" type="file" id="banner">
+						<input class="file-input" name="banner" type="file" id="banner" (change)="fileChange($event)">
 						<span class="file-cta">
 							<span class="file-icon">
 								<i class="fa fa-upload"></i>
@@ -23,7 +23,8 @@
 							<span class="file-label">
 								Choose a file…
 							</span>
-						</span>
+            </span>
+            <span class="file-name">{{ file !== undefined ? file.name : '' }}</span>
 					</label>
 				</div>
 			</div>
@@ -35,19 +36,23 @@
 				</p>
       </div>
       <div class="address-input">
-        <address-input (newAddress)="newAddress($event)" [label]="'Address :'"></address-input>
+        <address-input
+          (newAddress)="newAddress($event)"
+          [label]="'Address :'"
+          [defaultValue]="address"
+        ></address-input>
       </div>
       <div class="field">
         <label for="begin_at" class="label">Start :</label>
         <p class="control">
-          <my-date-picker name="begin_at" [options]="datePickerOption" (dateChanged)="onBeginChanged($event)"></my-date-picker>
+          <my-date-picker name="begin_at" [options]="datePickerOption" [(ngModel)]="begin"></my-date-picker>
         </p>
         <label for="end_at" class="label">End :</label>
         <p class="control">
-          <my-date-picker name="end_at" [options]="datePickerOption" (dateChanged)="onEndChanged($event)"></my-date-picker>
+          <my-date-picker name="end_at" [options]="datePickerOption" [(ngModel)]="end"></my-date-picker>
         </p>
 			</div>
 			<button type="submit" class="button is-success">Create event!</button>
-		</form>
+    </form>
 	</div>
 </div>

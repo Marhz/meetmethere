@@ -1,0 +1,17 @@
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <button class="pagination-previous cursor" (click)="prev()" [disabled]="infos.page == 1">Previous</button>
+  <button class="pagination-next cursor" (click)="next()" [disabled]="infos.page == infos.lastPage">Next page</button>
+  <ul class="pagination-list">
+    <li *ngIf="needFirst()">
+      <a class="pagination-link" aria-label="Goto page 1">1</a>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <li *ngFor="let page of getPages()">
+        <a class="pagination-link" (click)="changePage(page)" [ngClass]="{'is-current': page == infos.page}" aria-label="Goto page 45">{{ page }}</a>
+    </li>
+    <li *ngIf="needLast()">
+      <span class="pagination-ellipsis">&hellip;</span>
+      <a class="pagination-link" aria-label="Goto page 86">{{ infos.lastPage }}</a>
+    </li>
+  </ul>
+</nav>

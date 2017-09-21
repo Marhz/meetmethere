@@ -13,10 +13,9 @@ export class MessageInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
       .do(event => {
-        if (event instanceof HttpResponse) {
-          if(event.body !== null && event.body.hasOwnProperty('message')) {
-            this.alertService.show(event.body.message);
-          }
+        if (! (event instanceof HttpResponse)) return;
+        if(event.body !== null && event.body.hasOwnProperty('message')) {
+          this.alertService.show(event.body.message);
         }
       });
   }

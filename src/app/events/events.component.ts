@@ -12,6 +12,9 @@ import { EventService } from '../event/event.service';
 export class EventsComponent implements OnInit {
 
   events: Event[];
+  paginationInfos: object;
+  eventsReady: boolean = false;
+  page: number = 1;
 
   constructor(
     private router: Router,
@@ -23,6 +26,25 @@ export class EventsComponent implements OnInit {
   }
 
   getEvents(): void {
-    this.eventService.getEvents().then(events => this.events = events);
+    this.eventService.getEvents(this.page).then(data => {
+      this.paginationInfos = {
+        page: data['current_page'],
+        nextPage: data['next_page'],
+        prevPage: data['prev_page'],
+        lastPage: data['last_page']
+      }
+      this.events = data['data'];
+      this.eventsReady = true;
+    });
+  }
+
+  pageChanged(page: number): void {
+    console.log(page);
+    this.page = page;
+    this.getEvents();
+  }
+
+  bannerBackground(event: Event): string {
+    return `url("${event.bannerUrl()}") no-repeat center`;
   }
 }

@@ -23,6 +23,7 @@ body * {
 
 html {
   font-size: 20px;
+  background: #efefef;
   @media screen and (max-width: $tablet) {
     font-size: 16px;
     & .is-fluid {
@@ -38,5 +39,8 @@ html {
 .flex {
   display: flex;
   align-items: center;
+}
 
+.cursor {
+  cursor: pointer;
 }

@@ -1,4 +1,5 @@
 import { User } from '../user';
+import * as Globals from '../globals';
 
 export class Event {
 	id: number;
@@ -10,6 +11,14 @@ export class Event {
   latitude: number;
   longitude: number;
   participants: User[];
+  banner;
+  creator: User;
+  participants_count: number;
+  comments_count: number;
 
   constructor() {}
+
+  public bannerUrl(): string {
+    return Globals.url + this.banner;
+  }
 }

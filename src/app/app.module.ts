@@ -32,6 +32,7 @@ import { MessageInterceptor } from "./interceptors/message.interceptor";
 import { UrlInterceptor } from "./interceptors/url.interceptor";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { MyDatePickerModule } from 'mydatepicker';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     CommentComponent,
     CommentsFormComponent,
     EventsMapComponent,
-    AddressInputComponent
+    AddressInputComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

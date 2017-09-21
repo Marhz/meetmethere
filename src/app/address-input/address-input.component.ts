@@ -12,6 +12,8 @@ import { MapsAPILoader } from '@agm/core';
 export class AddressInputComponent implements OnInit {
 
   @Input() label: string = "";
+  @Input() defaultValue: string = "";
+
   public formControl: FormControl;
   @ViewChild("search")
   public searchElementRef: ElementRef

@@ -1,7 +1,23 @@
-<div *ngFor="let event of events" class="box">
-	<a [routerLink]="['/events', event.id]" href="#">
-		<p>Name : {{event.name}}</p>
-		<hr>
-		<p>Description : {{event.description}}</p>
-	</a>
+<h1 class="title">Events</h1>
+<div  class="" *ngIf="eventsReady">
+  <app-pagination [infos]="paginationInfos" (pageChange)="pageChanged($event)"></app-pagination>
+  <div class="events flex">
+    <div class="event" *ngFor="let event of events">
+      <a [routerLink]="['/events', event.id]">
+        <div class="event-banner">
+          <div class="event-banner_infos flex">
+            <span class="icon"><i class="fa fa-user"></i>{{ event.participants_count }}</span>
+            <span class="icon"><i class="fa fa-comment"></i>{{ event.comments_count }}</span>
+          </div>
+          <img [src]="event.bannerUrl()" alt="">
+          <p class="event-banner_name">{{event.name}}</p>
+        </div>
+        <div class="event-details">
+          <p class="event-details_address">{{ event.address }}</p>
+          <p class="event-details_desc">Description : {{event.description.substring(0, 100)}}...</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <app-pagination [infos]="paginationInfos" (pageChange)="pageChanged($event)"></app-pagination>
 </div>

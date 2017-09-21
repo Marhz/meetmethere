@@ -1,6 +1,7 @@
  <div *ngIf="event" class="event-page section is-fluid">
    <div class="event columns is-multiline is-centered">
     <div class="event-details column is-12 is-9-widescreen is-8-desktop">
+      <img [src]="imageUrl()" alt="">
       <p class="title">{{event.name}}</p>
       <p class="">{{event.description}}</p>
       <p>Address: {{event.address}} </p>
@@ -31,6 +32,7 @@
               <img src="{{ user.avatar }}" alt="">
             </figure>
             <p>{{ user.name }}</p>
+            <pre *ngIf="user.isCreator(event)">Creator</pre>
           </li>
         </ul>
       </div>

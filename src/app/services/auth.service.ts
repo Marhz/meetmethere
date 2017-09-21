@@ -45,15 +45,9 @@ export class AuthService {
 	getUser() {
     if (localStorage.getItem('auth') === null) return;
 		if (this.user === undefined) {
-			const user = JSON.parse(localStorage.getItem('auth'));
-			this.user = new User(
-				user.id,
-				user.name,
-				user.email,
-				user.avatar,
-				user.created_at,
-				user.updated_at,
-			);
+      const user = JSON.parse(localStorage.getItem('auth'));
+      this.user = new User();
+      this.user = Object.assign(this.user, user);
 		}
 		return this.user;
 	}
@@ -82,7 +76,12 @@ export class AuthService {
 	signOut(): void {
     localStorage.removeItem('token');
 		localStorage.removeItem('auth');
-	}
+  }
+
+  public getBaseUrl(): string {
+    return "http://meetmethere.dev/";
+  }
+
 	private handleError(error: any): Promise<any> {
 		return Promise.reject(error.json().error || error);
 	}

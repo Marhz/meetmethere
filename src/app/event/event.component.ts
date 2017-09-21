@@ -1,9 +1,10 @@
+import { User } from './../user';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common'
 import 'rxjs/add/operator/switchMap';
 
-import { Event } from './event.model';
+// import { Event } from './event.model';
 import { EventService } from './event.service';
 import { AuthService } from '../services/auth.service';
 import { ParticipationService } from '../services/participation.service';
@@ -16,7 +17,7 @@ import { AlertService } from "../alert/alert.service";
 	styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
-	@Input() event: Event;
+	private event;
 	private id: number;
 	private coords;
 	private mapReady = false;
@@ -33,18 +34,19 @@ export class EventComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.getEvent();
-    // setTimeout(() => this.hideMap = true, 3000);
+    this.getEvent();
   }
 
 	getEvent(): void {
 		this.route.paramMap
 			.switchMap((params: ParamMap) => this.eventService.getEvent(+params.get('id')))
 			.subscribe(event => {
-				this.event = event;
+        this.event = event;
+        console.log(this.event. test());
         this.coords = {lat: event.latitude, lng: event.longitude};
         this.mapReady = true;
-    console.log(this.event);
+        let user = this.event.participants[0] as User;
+        console.log(user.isCreator(this.event));
 
 				//this.getEventCoordinates(event.address);
 			}, err => console.log("..."));
@@ -86,5 +88,9 @@ export class EventComponent implements OnInit {
 
   isParticipating(): boolean {
     return this.event.participants.filter(user => user.id == this.authService.getUser().id).length > 0
+  }
+
+  imageUrl(): string {
+    return this.authService.getBaseUrl()+this.event.banner;
   }
 }

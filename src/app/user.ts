@@ -1,10 +1,18 @@
+import { Event } from './event/event.model';
+
 export class User {
-	constructor(
-		public id: string,
-		public name: string,
-		public email: string,
-		public avatar: string,
-		public created_at: string,
-		public updated_at: string,
-	) {}
+  tg: string = '';
+  id: number;
+  name: string;
+  email: string;
+  avatar: string;
+  created_at: string;
+  updated_at: string;
+
+	constructor() {}
+
+  public isCreator(event: Event)  {
+    return this.id === event.creator.id;
+  }
 }
+
